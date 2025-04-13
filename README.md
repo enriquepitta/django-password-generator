@@ -4,7 +4,8 @@ Generador de contraseñas seguras desarrollado con **Django + Bootstrap 5**.
 Permite personalizar la longitud, y elegir si incluir letras mayúsculas, números y caracteres especiales.
 
 ## Preview 🚀  
-![Captura del proyecto](https://i.postimg.cc/5jy3cTJ5/Captura-de-pantalla-2025-04-13-a-la-s-5-08-42-p-m.png)
+![Captura del proyecto](https://i.postimg.cc/fWjgdQgP/Captura-de-pantalla-2025-04-13-a-la-s-5-08-42-p-m.png)
+
 ---
 
 ## 🌐 Demo en vivo
