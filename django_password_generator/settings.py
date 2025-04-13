@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-_d1lri4izw6v1h5qlk44w=!vl)@kh(fpz*$h&6ac*1a)jk#su0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['django-password-generator-331q.onrender.com']
 
 
 # Application definition
