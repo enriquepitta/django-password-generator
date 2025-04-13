@@ -19,11 +19,12 @@ def home(request):
     return render(request, template)
 
 def password(request):
+    length = int(request.GET.get('length', 12))  # Valor por defecto 12 si no se selecciona
 
-    length = int(request.GET.get('length'))
-    uppercase = request.GET.get('uppercase')
-    specialCharacters = request.GET.get('specialCharacters')
-    numbers = request.GET.get('numbers')
+    # Obtener si están marcados o no
+    uppercase = 'uppercase' in request.GET
+    specialCharacters = 'specialCharacters' in request.GET
+    numbers = 'numbers' in request.GET
 
     character = list('abcdefghijklmnñopqrstuvwxyz')
     generate_password = ''
@@ -32,17 +33,21 @@ def password(request):
         character.extend(list("ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"))
 
     if specialCharacters:
-        character.extend(list("°|!#$%&/()=?¡¿´+-*<>"))        
+        character.extend(list("°|!#$%&/()=?¡¿´+-*<>"))
 
     if numbers:
-        character.extend(list("0123456789"))     
+        character.extend(list("0123456789"))
 
     for _ in range(length):
         generate_password += random.choice(character)
 
-    ranges = {
+    # Este diccionario pasa todos los valores necesarios al template
+    context = {
         'password': generate_password,
+        'length': length,
+        'uppercase': uppercase,
+        'specialCharacters': specialCharacters,
+        'numbers': numbers,
     }
 
-    template = 'index.html'
-    return render(request, template, ranges)
+    return render(request, 'index.html', context)

@@ -1,31 +1,57 @@
 {% extends 'layout.html' %}
 {% block content %}
-<div class="col-md-4 offset-md-4" >
-    <form action="{% url 'password' %}" class="card card- p-5" style="background-color: #303030;">
-        <h2 class="mb-3">Password Generator</h2>
-        <div class="rounded p-2" style="background-color: #212121;">
-            <input style="background: transparent; border: none; color:azure" value="{{ password }}">
-        </div>
-        
-        <label class="mb-3" for="length">Select the length of your password.</label>
-        <select name="length" id="length" class="form-control  mb-3">
-            <option value="4">4 Characters</option>
-            <option value="6">6 Characters</option>
-            <option value="12">12 Characters</option>
-        </select>
-        <div class="form-check form-switch my-2">
-            <label for="uppercase" class="form-check-label">Uppercase</label>
-            <input type="checkbox" name="uppercase" id="uppercase" class="form-check-input">
-        </div>
-        <div class="form-check form-switch my-2">
-            <label for="specialCharacter" class="form-check-label">Special Character</label>
-            <input type="checkbox" name="specialCharacters" id="specialCharacters" class="form-check-input">
-        </div>
-        <div class="form-check form-switch my-2">
-            <label for="numbers" class="form-check-label">Numbers</label>
-            <input type="checkbox" name="numbers" id="numbers" class="form-check-input">
-        </div>
-        <button class="btn btn-primary mt-3">Generate password</button>
-    </form>
-</div>
+    <div class="col-md-6 offset-md-3 col-lg-4 offset-lg-4 mt-5">
+        <form action="{% url 'password' %}" class="card p-4 shadow-lg border-0" style="background-color: #303030;">
+            <h3 class="mb-4 text-white text-center">Password Generator</h3>
+
+            {% if password %}
+                <div class="mb-5 p-3 rounded bg-dark text-center d-flex align-items-center justify-content-between">
+                    <input
+                            id="passwordField"
+                            type="text"
+                            readonly
+                            style="background: transparent; border: none; width: 100%; color: azure; font-size: 1.1rem;"
+                            value="{{ password }}"
+                    >
+                    <button
+                            type="button"
+                            onclick="copyPassword()"
+                            class="btn btn-outline-light btn-sm ms-3"
+                            title="Copiar"
+                    >
+                        <i class="bi bi-clipboard"></i>
+                    </button>
+                </div>
+            {% endif %}
+
+            <div class="mb-4">
+                <label for="length" class="form-label text-light">Longitud de la contraseña</label>
+                <select name="length" id="length" class="form-select py-2">
+                    <option value="4" {% if length == 4 %}selected{% endif %}>4 caracteres</option>
+                    <option value="6" {% if length == 6 %}selected{% endif %}>6 caracteres</option>
+                    <option value="12" {% if length == 12 %}selected{% endif %}>12 caracteres</option>
+                </select>
+            </div>
+
+            <div class="form-check form-switch mb-4">
+                <input type="checkbox" name="uppercase" id="uppercase" class="form-check-input"
+                       {% if uppercase %}checked{% endif %}>
+                <label for="uppercase" class="form-check-label text-light">Incluir mayúsculas</label>
+            </div>
+
+            <div class="form-check form-switch mb-4">
+                <input type="checkbox" name="specialCharacters" id="specialCharacters" class="form-check-input"
+                       {% if specialCharacters %}checked{% endif %}>
+                <label for="specialCharacters" class="form-check-label text-light">Incluir caracteres especiales</label>
+            </div>
+
+            <div class="form-check form-switch mb-5">
+                <input type="checkbox" name="numbers" id="numbers" class="form-check-input"
+                       {% if numbers %}checked{% endif %}>
+                <label for="numbers" class="form-check-label text-light">Incluir números</label>
+            </div>
+
+            <button class="btn btn-primary w-100 py-2">Generar contraseña</button>
+        </form>
+    </div>
 {% endblock %}
