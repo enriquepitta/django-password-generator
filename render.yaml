@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: password-generator
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn django_password_generator.wsgi"
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
